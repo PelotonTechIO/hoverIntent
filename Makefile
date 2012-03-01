@@ -1,13 +1,11 @@
-FOUNDRY_DIR = ../..
-PRODUCTION_DIR = ${FOUNDRY_DIR}/scripts
-DEVELOPMENT_DIR = ${FOUNDRY_DIR}/scripts_
-MODULARIZE = ${FOUNDRY_DIR}/build/modularize
-UGLIFY = uglifyjs --unsafe -nc
+include ../../build/modules.mk
 
-all: body min
+MODULE = hoverIntent
+FILENAME = ${MODULE}.js
+SOURCE = jquery.${MODULE}.js
+PRODUCTION = ${PRODUCTION_DIR}/${FILENAME}
+DEVELOPMENT = ${DEVELOPMENT_DIR}/${FILENAME}
 
-body:
-	${MODULARIZE} -n "hoverIntent" jquery.hoverIntent.js > ${DEVELOPMENT_DIR}/hoverIntent.js
-
-min:
-	${UGLIFY} ${DEVELOPMENT_DIR}/hoverIntent.js > ${PRODUCTION_DIR}/hoverIntent.js
+all:
+	${MODULARIZE} -n "${MODULE}" ${SOURCE} > ${DEVELOPMENT}
+	${UGLIFYJS} ${DEVELOPMENT} > ${PRODUCTION}
