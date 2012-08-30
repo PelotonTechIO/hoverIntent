@@ -101,5 +101,5 @@ $.fn.hoverIntent = function(f,g) {
 	};
 
 	// bind the function to the two event listeners
-	return this.bind('mouseenter',handleHover).bind('mouseleave',handleHover);
+	return this.on('mouseenter mouseleave mouseover mouseout', handleHover);
 };
